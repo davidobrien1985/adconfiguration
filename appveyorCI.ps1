@@ -133,22 +133,22 @@ if ($env:APPVEYOR_PULL_REQUEST_TITLE)
 
 ##Increment version number of the module
 
-write-host "Incrementing Module version, current version: " -NoNewline
+#write-host "Incrementing Module version, current version: " -NoNewline
 
 #Load file content
-$ModuleDefinitionContent = Get-Content -Path $Psd1Path | Out-String
+#$ModuleDefinitionContent = Get-Content -Path $Psd1Path | Out-String
 #Invoke the contents to create hashttable we can edit.
-$ModuleDefinition = Invoke-Expression $ModuleDefinitionContent
+#$ModuleDefinition = Invoke-Expression $ModuleDefinitionContent
 #Get current version number from hashtable
-$CurrentVersion = [version]$ModuleDefinition.ModuleVersion
+#$CurrentVersion = [version]$ModuleDefinition.ModuleVersion
 
-write-host "$CurrentVersion" -ForegroundColor blue -BackgroundColor darkyellow
+#write-host "$CurrentVersion" -ForegroundColor blue -BackgroundColor darkyellow
 
 #Increment the revision number
-$ModuleDefinition.ModuleVersion = (New-Object -TypeName System.Version -ArgumentList $CurrentVersion.Major, $CurrentVersion.Minor, ($CurrentVersion.Build+1), $BuildNumber).ToString()
+#$ModuleDefinition.ModuleVersion = (New-Object -TypeName System.Version -ArgumentList $CurrentVersion.Major, $CurrentVersion.Minor, ($CurrentVersion.Build+1), $BuildNumber).ToString()
 
-write-host "New version: " -NoNewline
-write-host "$($ModuleDefinition.ModuleVersion)" -ForegroundColor blue -BackgroundColor darkyellow
+#write-host "New version: " -NoNewline
+#write-host "$($ModuleDefinition.ModuleVersion)" -ForegroundColor blue -BackgroundColor darkyellow
 
 #Update the module with the new version
 #Todo - Find out why this isn't working in Appveyor
@@ -157,7 +157,7 @@ write-host "$($ModuleDefinition.ModuleVersion)" -ForegroundColor blue -Backgroun
 
 #Workaround for Update-ModuleManifest issue
 #Convert ht back to pson and write out to file
-ConvertTo-PSON $ModuleDefinition -Layers 3 | Set-Content -Path $Psd1Path
+#ConvertTo-PSON $ModuleDefinition -Layers 3 | Set-Content -Path $Psd1Path
 
 
 ##Publish the resource
