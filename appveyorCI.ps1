@@ -166,4 +166,4 @@ write-host "Publishing module to Powershell Gallery: " -NoNewline
 write-host "$ModuleName" -ForegroundColor blue -BackgroundColor darkyellow
 write-host `n
 
-Publish-Module -Name $ModuleName -NuGetApiKey $PublishingNugetKey
+Publish-Module -Name $ModuleName -NuGetApiKey $PublishingNugetKey -Verbose
