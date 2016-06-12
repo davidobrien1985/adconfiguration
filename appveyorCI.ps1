@@ -52,7 +52,7 @@ Function ConvertTo-PSON($Object, [Int]$Depth = 9, [Int]$Layers = 1, [Switch]$Str
 ##Variables
 $ModuleName = $env:ModuleName
 $ModuleLocation = $env:APPVEYOR_BUILD_FOLDER
-$PublishingNugetKey = $env:nugetKey
+$PublishingNugetKey = $env:nuget_api_key
 $Psd1Path = "./$ModuleName/$ModuleName.psd1"
 $BuildNumber = $env:APPVEYOR_BUILD_NUMBER
 
