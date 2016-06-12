@@ -60,7 +60,7 @@ $BuildNumber = $env:APPVEYOR_BUILD_NUMBER
 #Add current directory to ps modules path so module is available
 $env:psmodulepath = $env:psmodulepath + ";" + "C:\projects"
 #Install dsc resource designer to make tests available
-Install-Module -Name xDSCResourceDesigner -force
+#Install-Module -Name xDSCResourceDesigner -force
 
 Write-Host `n
 Write-Host "PS Module Path: $($env:psmodulepath)"
@@ -75,8 +75,8 @@ Write-Host `n
 $DSC | Format-Table
 
 write-host `n
-write-host " Testing each resource in module: " -NoNewline
-write-host "$ModuleName" -ForegroundColor blue -BackgroundColor darkyellow
+#write-host " Testing each resource in module: " -NoNewline
+#write-host "$ModuleName" -ForegroundColor blue -BackgroundColor darkyellow
 write-host `n
 
 ##Check module exists
@@ -87,6 +87,7 @@ if (-not ($DSC | ? {$_.Module.Name -eq $ModuleName}))
 
 $ExportedDSCResources = @()
 ##Test the modules resources
+<#
 foreach ($Resource in ($DSC | ? {$_.Module.Name -eq $ModuleName}))
 {
     write-host "Running Tests against $($Resource.Name) resource" -ForegroundColor Yellow
@@ -117,7 +118,7 @@ foreach ($Resource in ($DSC | ? {$_.Module.Name -eq $ModuleName}))
         exit 1
     }
 }
-
+#>
 #If it's a pull request call it a day, we just wanted to run the tests
 if ($env:APPVEYOR_PULL_REQUEST_TITLE)
 {
