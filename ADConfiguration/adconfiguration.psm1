@@ -48,7 +48,7 @@ class ADSite {
         Remove-ADReplicationSite -Identity $this.SiteName -Confirm:$false -Verbose
     }
     elseif ($this.Ensure -eq 'Present') {
-        if ($adsite.SiteName -eq $null) {
+        if (($adsite.SiteName -eq $null) -or ($this.newSiteName -eq $null)) {
             Write-Verbose -Message "Creating AD Site $($this.SiteName)."
             New-ADReplicationSite -Name $this.SiteName -Description $this.siteDescription -Verbose
         }
@@ -81,6 +81,11 @@ class ADSite {
         Write-Verbose -Message 'In Present if loop'
         if ($this.newSiteName) {
             Write-Verbose -Message 'new site name detected.'
+
+            try {
+                $ADSite = Get-ADReplicationSite -Identity $this.newSiteName -ErrorAction Ignore
+            }
+            catch {}
 
             if ($ADSite.Name -ne $this.newSiteName) {
                 Write-Verbose -Message "$($ADSite.Name) is not in desired state."
