@@ -1,0 +1,13 @@
+version: 1.0.{build}
+branches:
+  only:
+  - master
+image: WMF 5
+install:
+  - ps: Get-PackageProvider -Name NuGet -Force
+environment:
+  nuget_api_key:
+    secure: QvpliMcd1+3wTCfqfwCJIDSLW8l3ejGWqjPRnLYKjc2TrFv6pKLAnHjPhKS4Ktbk
+  ModuleName: adconfiguration
+build_script:
+- ps: . .\appveyorCI.ps1
